@@ -3,14 +3,16 @@ package com.sudoku;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
     private JButton btnNewGame = new JButton("New Game");
     private JButton btnShowAnswer = new JButton("Show Answer");
     private JButton btnExit = new JButton("Exit");
 
-    private JLabel timeLabel = new JLabel("00:00");
-    
+    private GameTime timeLabel = new GameTime(0, 0, 0, 0);
+
     private JPanel mainPanel = new JPanel();
     private GamePanel gamePanel = new GamePanel();
     private JPanel controlPanel = new JPanel();
@@ -36,6 +38,13 @@ public class GameFrame extends JFrame {
 
         btnNewGame.setPreferredSize(new Dimension(250, 50));
         btnNewGame.setFont(font);
+        btnNewGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.NewGame();
+                timeLabel.Reset();
+            }
+        });
 
         btnShowAnswer.setPreferredSize(new Dimension(250, 50));
         btnShowAnswer.setFont(font);
