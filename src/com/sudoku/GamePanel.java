@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel {
-    private int[][] _pan = SudokuPanGenerator.GeneratePan();
+    private int[][] _pan;
     private GameButton[][] pan = new GameButton[9][9];
     private GamePosition selectedPos = new GamePosition();
 
@@ -19,6 +19,10 @@ public class GamePanel extends JPanel {
     }
 
     public void NewGame() {
+        removeAll();
+        _pan = SudokuPanGenerator.GeneratePan();
+        selectedPos.setEmpty();
+
         for (int i = 0; i < 9 * 9; i++) {
             GameButton t = new GameButton("" + _pan[i / 9][i % 9], i / 9, i % 9);
             t.setPreferredSize(new Dimension(60, 60));
