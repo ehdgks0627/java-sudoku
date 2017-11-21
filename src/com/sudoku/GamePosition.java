@@ -1,23 +1,23 @@
 package com.sudoku;
 
 public class GamePosition extends Object {
-    int x;
-    int y;
+    int row;
+    int col;
 
     public GamePosition() {
         this(-1, -1);
     }
 
-    public GamePosition(int x, int y) {
-        if (x >= 0) {
-            this.x = x;
+    public GamePosition(int row, int col) {
+        if (row >= 0) {
+            this.row = row;
         } else {
-            this.x = -1;
+            this.row = -1;
         }
-        if (y >= 0) {
-            this.y = y;
+        if (col >= 0) {
+            this.col = col;
         } else {
-            this.y = -1;
+            this.col = -1;
         }
     }
 
@@ -33,7 +33,7 @@ public class GamePosition extends Object {
             return false;
         }
         GamePosition _obj = (GamePosition) object;
-        if (_obj.x == this.x && _obj.y == this.y) {
+        if (_obj.row == this.row && _obj.col == this.col) {
             return true;
         } else {
             return false;
@@ -41,7 +41,7 @@ public class GamePosition extends Object {
     }
 
     public boolean isEmpty() {
-        if (x == -1 && y == -1) {
+        if (row == -1 && col == -1) {
             return true;
         } else {
             return false;
@@ -49,12 +49,12 @@ public class GamePosition extends Object {
     }
 
     public void setEmpty() {
-        x = -1;
-        y = -1;
+        row = -1;
+        col = -1;
     }
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new GamePosition(x, y);
+        return new GamePosition(row, col);
     }
 }

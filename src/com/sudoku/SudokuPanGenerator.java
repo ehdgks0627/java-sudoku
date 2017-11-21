@@ -1,9 +1,9 @@
 package com.sudoku;
 
 public class SudokuPanGenerator {
-    public static int[][] GeneratePan() {
-        int[][] pan = new int[9][9];
+    public static GameInfo GeneratePan() {
+        GameInfo answer = new GameInfo();
 
-        return pan;
+        return answer;
     }
 }
