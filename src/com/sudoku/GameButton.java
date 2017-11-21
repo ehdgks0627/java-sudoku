@@ -6,14 +6,20 @@ import java.awt.*;
 public class GameButton extends JButton {
     private GamePosition pos;
     private int data = -1;
+    private boolean isStatic;
 
-    GameButton(String text, int x, int y) {
+    GameButton(String text, boolean isStatic, int row, int col) {
         super(text);
-        pos = new GamePosition(x, y);
+        pos = new GamePosition(row, col);
+        this.isStatic = isStatic;
     }
 
     public GamePosition getpos() {
         return pos;
+    }
+
+    public boolean getIsStatic() {
+        return isStatic;
     }
 
     public int getdata() {
@@ -37,5 +43,4 @@ public class GameButton extends JButton {
         setOpaque(true);
         updateUI();
     }
-
 }
