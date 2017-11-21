@@ -41,11 +41,10 @@ public class GamePanel extends JPanel {
                             Object source = e.getSource();
                             if (source instanceof GameButton) {
                                 GameButton btn = (GameButton) source;
-                                if(btn.getisStatic)
-                                {
+                                if (btn.getIsStatic()) {
                                     return;
                                 }
-                                GamePosition pos;
+                                GamePosition pos = null;
                                 try {
                                     pos = (GamePosition) btn.getpos().clone();
                                 } catch (CloneNotSupportedException e1) {
