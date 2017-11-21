@@ -20,16 +20,16 @@ public class GameTime extends JLabel {
         this.minute = minute % 60;
         this.second = second % 60;
         this.millisecond = millisecond % 60;
-        onTimer = new Timer(100, (ActionEvent e) -> {
+        onTimer = new Timer(10, (ActionEvent e) -> {
             AddMSecond();
             setText(toString());
         });
-        onTimer.start();
+        Start();
     }
 
     public void AddMSecond() {
         millisecond += 1;
-        if (millisecond >= 10) {
+        if (millisecond >= 100) {
             millisecond = 0;
             second += 1;
             if (second >= 60) {
@@ -50,9 +50,17 @@ public class GameTime extends JLabel {
         millisecond = 0;
     }
 
+    public void Start() {
+        onTimer.start();
+    }
+
+    public void Stop() {
+        onTimer.stop();
+    }
+
     @Override
     public String toString() {
-        return hour + ":" + minute + ":" + second + "." + millisecond;
+        return String.format("%d:%02d:%02d:%02d", hour, minute, second, millisecond);
     }
 
     @Override
