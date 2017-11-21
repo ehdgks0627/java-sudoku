@@ -1,16 +1,15 @@
 package com.sudoku;
 
-import javafx.geometry.Pos;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel {
-    private int[][] _pan;
+    private GameInfo answer;
     private GameButton[][] pan = new GameButton[9][9];
     private GamePosition selectedPos = new GamePosition();
+    private boolean isPlay;
 
     GamePanel() {
         setLayout(new GridLayout(9, 9));
@@ -19,53 +18,80 @@ public class GamePanel extends JPanel {
     }
 
     public void NewGame() {
+        isPlay = false;
         removeAll();
-        _pan = SudokuPanGenerator.GeneratePan();
+        answer = SudokuPanGenerator.GeneratePan();
         selectedPos.setEmpty();
 
-        for (int i = 0; i < 9 * 9; i++) {
-            GameButton t = new GameButton("" + _pan[i / 9][i % 9], i / 9, i % 9);
-            t.setPreferredSize(new Dimension(60, 60));
-            t.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    Object source = e.getSource();
-                    if (source instanceof GameButton) {
-                        GameButton btn = (GameButton) source;
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                GameButton t;
+                if (answer.getAnswer_mask(row, col)) {
+                    t = new GameButton("" + answer.getAnswer(row, col), true, row, col);
+                } else {
+                    t = new GameButton("", false, row, col);
+                }
 
-                        GamePosition pos = null;
-                        try {
-                            pos = (GamePosition) btn.getpos().clone();
-                        } catch (CloneNotSupportedException e1) {
-                            e1.printStackTrace();
-                        }
-                        if (selectedPos.isEmpty()) {
-                            btn.highlight();
-                            try {
-                                selectedPos = (GamePosition) btn.getpos().clone();
-                            } catch (CloneNotSupportedException e1) {
-                                e1.printStackTrace();
-                            }
-                        } else {
-                            if (selectedPos.equals(pos)) {
-                                btn.dehighlight();
-                                selectedPos.setEmpty();
-                            } else {
-                                pan[selectedPos.x][selectedPos.y].dehighlight();
-                                btn.highlight();
+                //TODO control isStatic
+                t.setPreferredSize(new Dimension(60, 60));
+                t.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (isPlay) {
+                            Object source = e.getSource();
+                            if (source instanceof GameButton) {
+                                GameButton btn = (GameButton) source;
+                                if(btn.getisStatic)
+                                {
+                                    return;
+                                }
+                                GamePosition pos;
                                 try {
-                                    selectedPos = (GamePosition) btn.getpos().clone();
+                                    pos = (GamePosition) btn.getpos().clone();
                                 } catch (CloneNotSupportedException e1) {
                                     e1.printStackTrace();
+                                }
+                                if (selectedPos.isEmpty()) {
+                                    btn.highlight();
+                                    try {
+                                        selectedPos = (GamePosition) btn.getpos().clone();
+                                    } catch (CloneNotSupportedException e1) {
+                                        e1.printStackTrace();
+                                    }
+                                } else {
+                                    if (selectedPos.equals(pos)) {
+                                        btn.dehighlight();
+                                        selectedPos.setEmpty();
+                                    } else {
+                                        pan[selectedPos.row][selectedPos.col].dehighlight();
+                                        btn.highlight();
+                                        try {
+                                            selectedPos = (GamePosition) btn.getpos().clone();
+                                        } catch (CloneNotSupportedException e1) {
+                                            e1.printStackTrace();
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
-            add(t);
-            pan[i / 9][i % 9] = t;
+                });
+                add(t);
+                pan[row][col] = t;
+                isPlay = true;
+            }
+        }
+    }
 
+    public void ShowSolution() {
+        isPlay = false;
+        if (!selectedPos.isEmpty()) {
+            pan[selectedPos.row][selectedPos.col].dehighlight();
+        }
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                pan[row][col].setText("" + answer.getAnswer(row, col));
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ public class GameFrame extends JFrame {
     private JButton btnShowAnswer = new JButton("Show Answer");
     private JButton btnExit = new JButton("Exit");
 
-    private GameTime timeLabel = new GameTime(0, 0, 0, 0);
+    private GameTime timeLabel = new GameTime();
 
     private JPanel mainPanel = new JPanel();
     private GamePanel gamePanel = new GamePanel();
@@ -48,6 +48,13 @@ public class GameFrame extends JFrame {
 
         btnShowAnswer.setPreferredSize(new Dimension(250, 50));
         btnShowAnswer.setFont(font);
+        btnShowAnswer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.ShowSolution();
+                timeLabel.Stop();
+            }
+        });
 
         btnExit.setPreferredSize(new Dimension(250, 50));
         btnExit.setFont(font);
