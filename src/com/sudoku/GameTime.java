@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class GameTime extends JLabel {
-
     private int hour;
     private int minute;
     private int second;
