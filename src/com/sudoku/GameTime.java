@@ -16,7 +16,7 @@ public class GameTime extends JLabel {
     }
 
     GameTime(int hour, int minute, int second, int millisecond) {
-        this.hour = hour;
+        this.hour = hour % Integer.MAX_VALUE;
         this.minute = minute % 60;
         this.second = second % 60;
         this.millisecond = millisecond % 60;

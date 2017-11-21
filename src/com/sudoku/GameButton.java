@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GameButton extends JButton {
     private GamePosition pos;
-    private int data = -1;
+    private int data = GamePosition.EMPTY_POSITION;
     private boolean isStatic;
 
     GameButton(String text, boolean isStatic, int row, int col) {

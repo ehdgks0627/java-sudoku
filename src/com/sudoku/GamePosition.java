@@ -3,21 +3,22 @@ package com.sudoku;
 public class GamePosition extends Object {
     int row;
     int col;
+    public static final int EMPTY_POSITION = -1;
 
     public GamePosition() {
-        this(-1, -1);
+        this(EMPTY_POSITION, EMPTY_POSITION);
     }
 
     public GamePosition(int row, int col) {
         if (row >= 0) {
             this.row = row;
         } else {
-            this.row = -1;
+            this.row = EMPTY_POSITION;
         }
         if (col >= 0) {
             this.col = col;
         } else {
-            this.col = -1;
+            this.col = EMPTY_POSITION;
         }
     }
 
@@ -41,7 +42,7 @@ public class GamePosition extends Object {
     }
 
     public boolean isEmpty() {
-        if (row == -1 && col == -1) {
+        if (row == EMPTY_POSITION && col == EMPTY_POSITION) {
             return true;
         } else {
             return false;
@@ -49,8 +50,8 @@ public class GamePosition extends Object {
     }
 
     public void setEmpty() {
-        row = -1;
-        col = -1;
+        row = EMPTY_POSITION;
+        col = EMPTY_POSITION;
     }
 
     @Override
