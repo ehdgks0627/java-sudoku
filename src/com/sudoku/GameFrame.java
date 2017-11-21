@@ -19,7 +19,7 @@ public class GameFrame extends JFrame {
 	private JPanel controlPanel = new JPanel();
 
 	GameFrame() {
-		setTitle("Ω∫µµƒÌ ∞‘¿”");
+		setTitle("Ïä§ÎèÑÏø† Í≤åÏûÑ");
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -29,8 +29,7 @@ public class GameFrame extends JFrame {
 
 		controlPanel.setLayout(new GridLayout(2, 1));
 		controlPanel.add(time);	
-		
-		
+
 		controlPanel.add(Button);
 		
 		Font font = new Font("null", Font.PLAIN, 20);
@@ -45,7 +44,6 @@ public class GameFrame extends JFrame {
 		Button.add(btnNewGame);
 		Button.add(btnShowAnswer);
 		Button.add(btnExit);
-
 
 		add(mainPanel);
 	}
