@@ -13,7 +13,15 @@ public class GameInfo {
         return answer[row][col];
     }
 
+    public void setAnswer(int row, int col, int value) {
+        answer[row][col] = value;
+    }
+
     public boolean getAnswer_mask(int row, int col) {
         return answer_mask[row][col];
+    }
+
+    public void setAnswer_mask(int row, int col, boolean value) {
+        answer_mask[row][col] = value;
     }
 }
