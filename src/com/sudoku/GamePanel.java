@@ -11,5 +11,6 @@ public class GamePanel extends JPanel {
             JButton t = new JButton("" + i);
             add(t);
         }
+ 
     }
 }
