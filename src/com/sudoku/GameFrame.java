@@ -2,50 +2,47 @@ package com.sudoku;
 
 import javax.swing.*;
 
-import com.sun.glass.ui.Size;
-
 import java.awt.*;
 
 public class GameFrame extends JFrame {
-	private JButton btnNewGame = new JButton("New Game");
-	private JButton btnShowAnswer = new JButton("Show Answer");
-	private JButton btnExit = new JButton("Exit");
+    private JButton btnNewGame = new JButton("New Game");
+    private JButton btnShowAnswer = new JButton("Show Answer");
+    private JButton btnExit = new JButton("Exit");
 
-	private JPanel Button = new JPanel();
-	private JPanel time = new JPanel();
+    private JLabel timeLabel = new JLabel("00:00");
+    
+    private JPanel mainPanel = new JPanel();
+    private GamePanel gamePanel = new GamePanel();
+    private JPanel controlPanel = new JPanel();
 
-	private JPanel mainPanel = new JPanel();
-	private GamePanel gamePanel = new GamePanel();
-	private JPanel controlPanel = new JPanel();
+    GameFrame() {
+        setTitle("스도쿠 게임");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	GameFrame() {
-		setTitle("스도쿠 게임");
-		setSize(800, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(gamePanel, BorderLayout.LINE_START);
+        mainPanel.add(controlPanel, BorderLayout.CENTER);
 
-		mainPanel.setLayout(new BorderLayout());
-		mainPanel.add(gamePanel, BorderLayout.LINE_START);
-		mainPanel.add(controlPanel, BorderLayout.CENTER);
+        controlPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+        controlPanel.add(timeLabel);
+        controlPanel.add(btnNewGame);
+        controlPanel.add(btnShowAnswer);
+        controlPanel.add(btnExit);
 
-		controlPanel.setLayout(new GridLayout(2, 1));
-		controlPanel.add(time);
+        Font font = new Font("null", Font.PLAIN, 20);
 
-		controlPanel.add(Button);
+        timeLabel.setFont(font);
 
-		Font font = new Font("null", Font.PLAIN, 20);
-		btnNewGame.setPreferredSize(new Dimension(250, 50));
-		btnNewGame.setFont(font);
-		btnShowAnswer.setPreferredSize(new Dimension(250, 50));
-		btnShowAnswer.setFont(font);
-		btnExit.setPreferredSize(new Dimension(250, 50));
-		btnExit.setFont(font);
+        btnNewGame.setPreferredSize(new Dimension(250, 50));
+        btnNewGame.setFont(font);
 
-		Button.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
-		Button.add(btnNewGame);
-		Button.add(btnShowAnswer);
-		Button.add(btnExit);
+        btnShowAnswer.setPreferredSize(new Dimension(250, 50));
+        btnShowAnswer.setFont(font);
 
-		add(mainPanel);
-	}
+        btnExit.setPreferredSize(new Dimension(250, 50));
+        btnExit.setFont(font);
 
+        add(mainPanel);
+    }
 }
