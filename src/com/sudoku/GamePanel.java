@@ -8,16 +8,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel {
+    private int[][] _pan = SudokuPanGenerator.GeneratePan();
     private GameButton[][] pan = new GameButton[9][9];
     private GamePosition selectedPos = new GamePosition();
 
     GamePanel() {
         setLayout(new GridLayout(9, 9));
 
-        //pan =
+        NewGame();
+    }
 
+    public void NewGame() {
         for (int i = 0; i < 9 * 9; i++) {
-            GameButton t = new GameButton("" + i, i / 9, i % 9);
+            GameButton t = new GameButton("" + _pan[i / 9][i % 9], i / 9, i % 9);
             t.setPreferredSize(new Dimension(60, 60));
             t.addActionListener(new ActionListener() {
                 @Override
@@ -28,14 +31,14 @@ public class GamePanel extends JPanel {
 
                         GamePosition pos = null;
                         try {
-                            pos = (GamePosition)btn.getpos().clone();
+                            pos = (GamePosition) btn.getpos().clone();
                         } catch (CloneNotSupportedException e1) {
                             e1.printStackTrace();
                         }
                         if (selectedPos.isEmpty()) {
                             btn.highlight();
                             try {
-                                selectedPos = (GamePosition)btn.getpos().clone();
+                                selectedPos = (GamePosition) btn.getpos().clone();
                             } catch (CloneNotSupportedException e1) {
                                 e1.printStackTrace();
                             }
@@ -47,7 +50,7 @@ public class GamePanel extends JPanel {
                                 pan[selectedPos.x][selectedPos.y].dehighlight();
                                 btn.highlight();
                                 try {
-                                    selectedPos = (GamePosition)btn.getpos().clone();
+                                    selectedPos = (GamePosition) btn.getpos().clone();
                                 } catch (CloneNotSupportedException e1) {
                                     e1.printStackTrace();
                                 }
@@ -58,7 +61,7 @@ public class GamePanel extends JPanel {
             });
             add(t);
             pan[i / 9][i % 9] = t;
-        }
 
+        }
     }
 }
