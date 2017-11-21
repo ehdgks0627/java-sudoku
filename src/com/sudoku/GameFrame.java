@@ -28,10 +28,10 @@ public class GameFrame extends JFrame {
 		mainPanel.add(controlPanel, BorderLayout.CENTER);
 
 		controlPanel.setLayout(new GridLayout(2, 1));
-		controlPanel.add(time);	
+		controlPanel.add(time);
 
 		controlPanel.add(Button);
-		
+
 		Font font = new Font("null", Font.PLAIN, 20);
 		btnNewGame.setPreferredSize(new Dimension(250, 50));
 		btnNewGame.setFont(font);
@@ -39,7 +39,7 @@ public class GameFrame extends JFrame {
 		btnShowAnswer.setFont(font);
 		btnExit.setPreferredSize(new Dimension(250, 50));
 		btnExit.setFont(font);
-		
+
 		Button.setLayout(new FlowLayout(FlowLayout.CENTER,0,20));
 		Button.add(btnNewGame);
 		Button.add(btnShowAnswer);
