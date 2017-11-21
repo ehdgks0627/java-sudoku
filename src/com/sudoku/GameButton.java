@@ -4,17 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameButton extends JButton {
-    private GamePosition pos;
-    private int data = GamePosition.EMPTY_POSITION;
+    private Position pos;
+    private int data = Position.EMPTY_POSITION;
     private boolean isStatic;
 
     GameButton(String text, boolean isStatic, int row, int col) {
         super(text);
-        pos = new GamePosition(row, col);
+        pos = new Position(row, col);
         this.isStatic = isStatic;
     }
 
-    public GamePosition getpos() {
+    public Position getpos() {
         return pos;
     }
 

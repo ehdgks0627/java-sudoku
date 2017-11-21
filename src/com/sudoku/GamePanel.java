@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class GamePanel extends JPanel {
     private GameInfo answer;
     private GameButton[][] pan = new GameButton[9][9];
-    private GamePosition selectedPos = new GamePosition();
+    private Position selectedPos = new Position();
     private boolean isPlay;
 
     GamePanel() {
@@ -44,16 +44,16 @@ public class GamePanel extends JPanel {
                                 if (btn.getIsStatic()) {
                                     return;
                                 }
-                                GamePosition pos = null;
+                                Position pos = null;
                                 try {
-                                    pos = (GamePosition) btn.getpos().clone();
+                                    pos = (Position) btn.getpos().clone();
                                 } catch (CloneNotSupportedException e1) {
                                     e1.printStackTrace();
                                 }
                                 if (selectedPos.isEmpty()) {
                                     btn.highlight();
                                     try {
-                                        selectedPos = (GamePosition) btn.getpos().clone();
+                                        selectedPos = (Position) btn.getpos().clone();
                                     } catch (CloneNotSupportedException e1) {
                                         e1.printStackTrace();
                                     }
@@ -65,7 +65,7 @@ public class GamePanel extends JPanel {
                                         pan[selectedPos.row][selectedPos.col].dehighlight();
                                         btn.highlight();
                                         try {
-                                            selectedPos = (GamePosition) btn.getpos().clone();
+                                            selectedPos = (Position) btn.getpos().clone();
                                         } catch (CloneNotSupportedException e1) {
                                             e1.printStackTrace();
                                         }

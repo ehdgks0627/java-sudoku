@@ -1,15 +1,15 @@
 package com.sudoku;
 
-public class GamePosition extends Object {
+public class Position extends Object {
     int row;
     int col;
     public static final int EMPTY_POSITION = -1;
 
-    public GamePosition() {
+    public Position() {
         this(EMPTY_POSITION, EMPTY_POSITION);
     }
 
-    public GamePosition(int row, int col) {
+    public Position(int row, int col) {
         if (row >= 0) {
             this.row = row;
         } else {
@@ -30,10 +30,10 @@ public class GamePosition extends Object {
         if (object == this) {
             return true;
         }
-        if (!(object instanceof GamePosition)) {
+        if (!(object instanceof Position)) {
             return false;
         }
-        GamePosition _obj = (GamePosition) object;
+        Position _obj = (Position) object;
         if (_obj.row == this.row && _obj.col == this.col) {
             return true;
         } else {
@@ -56,6 +56,6 @@ public class GamePosition extends Object {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        return new GamePosition(row, col);
+        return new Position(row, col);
     }
 }
