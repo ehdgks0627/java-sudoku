@@ -64,26 +64,26 @@ public class GamePanel extends JPanel {
                                 }
                                 Position pos = null;
                                 try {
-                                    pos = (Position) btn.getpos().clone();
+                                    pos = (Position) btn.getPos().clone();
                                 } catch (CloneNotSupportedException e1) {
                                     e1.printStackTrace();
                                 }
                                 if (selectedPos.isEmpty()) {
                                     btn.highlight();
                                     try {
-                                        selectedPos = (Position) btn.getpos().clone();
+                                        selectedPos = (Position) btn.getPos().clone();
                                     } catch (CloneNotSupportedException e1) {
                                         e1.printStackTrace();
                                     }
                                 } else {
                                     if (selectedPos.equals(pos)) {
-                                        btn.dehighlight();
+                                        btn.deHighlight();
                                         selectedPos.setEmpty();
                                     } else {
-                                        pan[selectedPos.row][selectedPos.col].dehighlight();
+                                        pan[selectedPos.row][selectedPos.col].deHighlight();
                                         btn.highlight();
                                         try {
-                                            selectedPos = (Position) btn.getpos().clone();
+                                            selectedPos = (Position) btn.getPos().clone();
                                         } catch (CloneNotSupportedException e1) {
                                             e1.printStackTrace();
                                         }
@@ -102,8 +102,8 @@ public class GamePanel extends JPanel {
 
     public void InputBoard(int num) {
         if (!selectedPos.isEmpty()) {
-            pan[selectedPos.row][selectedPos.col].setdata(num);
-            pan[selectedPos.row][selectedPos.col].dehighlight();
+            pan[selectedPos.row][selectedPos.col].setData(num);
+            pan[selectedPos.row][selectedPos.col].deHighlight();
             //TODO validate
         }
     }
@@ -112,7 +112,7 @@ public class GamePanel extends JPanel {
     public void ShowSolution() {
         isPlay = false;
         if (!selectedPos.isEmpty()) {
-            pan[selectedPos.row][selectedPos.col].dehighlight();
+            pan[selectedPos.row][selectedPos.col].deHighlight();
         }
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {

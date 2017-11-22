@@ -14,7 +14,7 @@ public class GameButton extends JButton {
         this.isStatic = isStatic;
     }
 
-    public Position getpos() {
+    public Position getPos() {
         return pos;
 
     }
@@ -24,12 +24,12 @@ public class GameButton extends JButton {
 
     }
 
-    public int getdata() {
+    public int getData() {
         return data;
 
     }
 
-    public void setdata(int data) {
+    public void setData(int data) {
         this.data = data;
         setText(Integer.toString(data));
     }
@@ -41,7 +41,7 @@ public class GameButton extends JButton {
         updateUI();
     }
 
-    public void dehighlight() {
+    public void deHighlight() {
         setBackground(Color.WHITE);
         setContentAreaFilled(false);
         setOpaque(true);
