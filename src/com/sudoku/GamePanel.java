@@ -38,10 +38,8 @@ public class GamePanel extends JPanel {
                 GameButton t;
                 if (answer.getAnswer_mask(row, col)) {
                     t = new GameButton("" + answer.getAnswer(row, col), true, row, col, pickColor(row, col));
-                    //t.setFont();
                 } else {
                     t = new GameButton("", false, row, col, pickColor(row, col));
-                    //t.setFont();
                 }
 
                 t.setPreferredSize(new Dimension(60, 60));
@@ -105,15 +103,16 @@ public class GamePanel extends JPanel {
                 });
                 add(t);
                 pan[row][col] = t;
-                isPlay = true;
             }
         }
+        isPlay = true;
     }
 
     public void InputBoard(int num) {
         if (!selectedPos.isEmpty()) {
             pan[selectedPos.row][selectedPos.col].setData(num);
             pan[selectedPos.row][selectedPos.col].deHighlight();
+            selectedPos.setEmpty();
             //TODO validate
         }
     }
