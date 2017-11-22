@@ -19,6 +19,14 @@ public class GamePanel extends JPanel {
         NewGame();
     }
 
+    public Color pickColor(int row, int col) {
+        if ((col < 3 || (5 < col && col < 9)) && (row < 3 || (row > 5 && row < 9)) || ((2 < row && row < 6) && (2 < col && col < 6))) {
+            return Color.WHITE;
+        } else {
+            return Color.GRAY;
+        }
+    }
+
     public void NewGame() {
         isPlay = false;
         removeAll();
@@ -29,9 +37,11 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < 9; col++) {
                 GameButton t;
                 if (answer.getAnswer_mask(row, col)) {
-                    t = new GameButton("" + answer.getAnswer(row, col), true, row, col);
+                    t = new GameButton("" + answer.getAnswer(row, col), true, row, col, pickColor(row, col));
+                    //t.setFont();
                 } else {
-                    t = new GameButton("", false, row, col);
+                    t = new GameButton("", false, row, col, pickColor(row, col));
+                    //t.setFont();
                 }
 
                 t.setPreferredSize(new Dimension(60, 60));

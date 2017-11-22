@@ -36,7 +36,7 @@ public class GameFrame extends JFrame {
 
         timeLabel.setFont(font);
 
-        btnNewGame.setPreferredSize(new Dimension(250, 50));
+        btnNewGame.setPreferredSize(new Dimension(200, 50));
         btnNewGame.setFont(font);
         btnNewGame.addActionListener(new ActionListener() {
             @Override
@@ -46,7 +46,7 @@ public class GameFrame extends JFrame {
             }
         });
 
-        btnShowAnswer.setPreferredSize(new Dimension(250, 50));
+        btnShowAnswer.setPreferredSize(new Dimension(200, 50));
         btnShowAnswer.setFont(font);
         btnShowAnswer.addActionListener(new ActionListener() {
             @Override
@@ -56,8 +56,14 @@ public class GameFrame extends JFrame {
             }
         });
 
-        btnExit.setPreferredSize(new Dimension(250, 50));
+        btnExit.setPreferredSize(new Dimension(200, 50));
         btnExit.setFont(font);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         add(mainPanel);
     }
