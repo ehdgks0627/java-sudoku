@@ -16,18 +16,22 @@ public class GameButton extends JButton {
 
     public Position getpos() {
         return pos;
+
     }
 
     public boolean getIsStatic() {
         return isStatic;
+
     }
 
     public int getdata() {
         return data;
+
     }
 
     public void setdata(int data) {
         this.data = data;
+        setText(Integer.toString(data));
     }
 
     public void highlight() {

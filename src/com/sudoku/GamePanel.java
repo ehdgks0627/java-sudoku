@@ -48,7 +48,7 @@ public class GamePanel extends JPanel {
                     public void keyReleased(KeyEvent e) {
                         char c = e.getKeyChar();
                         if ('1' <= c && c <= '9') {
-                            InputBoard(c);
+                            InputBoard(c - '0');
                         }
                     }
                 });
@@ -100,9 +100,9 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void InputBoard(char num) {
+    public void InputBoard(int num) {
         if (!selectedPos.isEmpty()) {
-            pan[selectedPos.row][selectedPos.col].setText( Character.toString(num));
+            pan[selectedPos.row][selectedPos.col].setdata(num);
             pan[selectedPos.row][selectedPos.col].dehighlight();
             //TODO validate
         }
