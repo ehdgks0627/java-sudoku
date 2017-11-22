@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel {
     private GameInfo answer;
@@ -32,8 +34,24 @@ public class GamePanel extends JPanel {
                     t = new GameButton("", false, row, col);
                 }
 
-                //TODO control isStatic
                 t.setPreferredSize(new Dimension(60, 60));
+                t.addKeyListener(new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        char c = e.getKeyChar();
+                        if ('1' <= c && c <= '9') {
+                            InputBoard(c);
+                        }
+                    }
+                });
                 t.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -81,6 +99,15 @@ public class GamePanel extends JPanel {
             }
         }
     }
+
+    public void InputBoard(char num) {
+        if (!selectedPos.isEmpty()) {
+            pan[selectedPos.row][selectedPos.col].setText( Character.toString(num));
+            pan[selectedPos.row][selectedPos.col].dehighlight();
+            //TODO validate
+        }
+    }
+
 
     public void ShowSolution() {
         isPlay = false;
