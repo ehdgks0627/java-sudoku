@@ -5,16 +5,22 @@ import java.awt.*;
 
 public class GameButton extends JButton {
     private Position pos;
-    private int data = Position.EMPTY_POSITION;
+    private int data = EMPTY_DATA;
     private boolean isStatic;
     private Color color;
 
-    public static final Color HIGHLIGHT_COLOR = Color.GREEN;
-    public static final Font STATIC_FONT = new Font("null", Font.BOLD, 20);
-    public static final Font GENERAL_FONT = new Font("null", Font.PLAIN, 20);
+    private static final Color HIGHLIGHT_COLOR = Color.GREEN;
+    private static final Font STATIC_FONT = new Font("null", Font.BOLD, 20);
+    private static final Font GENERAL_FONT = new Font("null", Font.PLAIN, 20);
+    public static final int EMPTY_DATA = -1;
 
-    GameButton(String text, boolean isStatic, int row, int col, Color color) {
-        super(text);
+    GameButton(int data, boolean isStatic, int row, int col, Color color) {
+        super();
+        if (isStatic) {
+            setText(Integer.toString(data));
+        }
+
+        this.data = data;
         pos = new Position(row, col);
         this.isStatic = isStatic;
         this.color = color;
@@ -48,7 +54,11 @@ public class GameButton extends JButton {
 
     public void setData(int data) {
         this.data = data;
-        setText(Integer.toString(data));
+        if (data == EMPTY_DATA) {
+            setText("");
+        } else {
+            setText(Integer.toString(data));
+        }
     }
 
     public void highlight() {
