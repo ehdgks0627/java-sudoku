@@ -24,7 +24,7 @@ public class GameTime extends JLabel {
             AddMSecond();
             setText(toString());
         });
-        Start();
+        setText(toString());
     }
 
     public void AddMSecond() {

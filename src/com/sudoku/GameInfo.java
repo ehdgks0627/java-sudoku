@@ -14,6 +14,7 @@ public class GameInfo {
     }
 
     public void setAnswer(int row, int col, int value) {
+
         answer[row][col] = value;
     }
 

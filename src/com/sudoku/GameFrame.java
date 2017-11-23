@@ -8,87 +8,89 @@ import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
 
-	private GameTime timeLabel = new GameTime();
+    private GameTime timeLabel = new GameTime();
 
-	private GamePanel gamePanel = new GamePanel(this);
+    private GamePanel gamePanel = new GamePanel(this);
 
-	GameFrame() {
-		setTitle("�뒪�룄荑� 寃뚯엫");
-		setSize(800, 600);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    GameFrame() {
+        setTitle("스도쿠게임");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BorderLayout());
-		mainPanel.add(gamePanel, BorderLayout.LINE_START);
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(gamePanel, BorderLayout.LINE_START);
 
-		JPanel controlPanel = new JPanel();
-		mainPanel.add(controlPanel, BorderLayout.CENTER);
+        JPanel controlPanel = new JPanel();
+        mainPanel.add(controlPanel, BorderLayout.CENTER);
 
-		Font font1 = new Font("null", Font.PLAIN, 12);
-		
-		JRadioButton easy = new JRadioButton("EASY");
-		easy.setFont(font1);
-		JRadioButton medium = new JRadioButton("MEDIUM");
-		medium.setFont(font1);
-		JRadioButton hard = new JRadioButton("HARD");
-		hard.setFont(font1);
-		
-		ButtonGroup group = new ButtonGroup();
-		group.add(easy);
-		group.add(medium);
-		group.add(hard);
+        Font font1 = new Font("null", Font.PLAIN, 12);
 
-		controlPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
-		controlPanel.add(easy);
-		controlPanel.add(medium);
-		controlPanel.add(hard);
-		controlPanel.add(timeLabel);
+        JRadioButton easy = new JRadioButton("EASY");
+        easy.setFont(font1);
+        easy.setSelected(true);
+        JRadioButton medium = new JRadioButton("MEDIUM");
+        medium.setFont(font1);
+        JRadioButton hard = new JRadioButton("HARD");
+        hard.setFont(font1);
 
-		JButton btnNewGame = new JButton("New Game");
-		controlPanel.add(btnNewGame);
+        ButtonGroup group = new ButtonGroup();
+        group.add(easy);
+        group.add(medium);
+        group.add(hard);
 
-		JButton btnShowAnswer = new JButton("Show Answer");
-		controlPanel.add(btnShowAnswer);
+        controlPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
+        controlPanel.add(easy);
+        controlPanel.add(medium);
+        controlPanel.add(hard);
+        controlPanel.add(timeLabel);
 
-		JButton btnExit = new JButton("Exit");
-		controlPanel.add(btnExit);
+        JButton btnNewGame = new JButton("New Game");
+        controlPanel.add(btnNewGame);
 
-		Font font = new Font("null", Font.PLAIN, 20);
-		timeLabel.setFont(font);
+        JButton btnShowAnswer = new JButton("Show Answer");
+        controlPanel.add(btnShowAnswer);
 
-		btnNewGame.setPreferredSize(new Dimension(200, 50));
-		btnNewGame.setFont(font);
-		btnNewGame.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gamePanel.NewGame();
-				timeLabel.Reset();
-			}
-		});
+        JButton btnExit = new JButton("Exit");
+        controlPanel.add(btnExit);
 
-		btnShowAnswer.setPreferredSize(new Dimension(200, 50));
-		btnShowAnswer.setFont(font);
-		btnShowAnswer.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				gamePanel.ShowSolution();
-				stopGame();
-			}
-		});
+        Font font = new Font("null", Font.PLAIN, 20);
+        timeLabel.setFont(font);
 
-		btnExit.setPreferredSize(new Dimension(200, 50));
-		btnExit.setFont(font);
-		btnExit.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
+        btnNewGame.setPreferredSize(new Dimension(200, 50));
+        btnNewGame.setFont(font);
+        btnNewGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.NewGame();
+                timeLabel.Reset();
+                timeLabel.Start();
+            }
+        });
 
-		add(mainPanel);
-	}
+        btnShowAnswer.setPreferredSize(new Dimension(200, 50));
+        btnShowAnswer.setFont(font);
+        btnShowAnswer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.ShowSolution();
+                stopGame();
+            }
+        });
 
-	public void stopGame() {
-		timeLabel.Stop();
-	}
+        btnExit.setPreferredSize(new Dimension(200, 50));
+        btnExit.setFont(font);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        add(mainPanel);
+    }
+
+    public void stopGame() {
+        timeLabel.Stop();
+    }
 }

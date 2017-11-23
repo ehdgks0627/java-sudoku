@@ -18,7 +18,13 @@ public class GamePanel extends JPanel {
         this.parentFrame = parentFrame;
 
         setLayout(new GridLayout(9, 9));
-        NewGame();
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                GameButton t = new GameButton(GameButton.EMPTY_DATA, false, row, col, Color.WHITE);
+                t.setPreferredSize(new Dimension(60, 60));
+                add(t);
+            }
+        }
     }
 
     public Color pickColor(int row, int col) {
