@@ -11,11 +11,13 @@ public class GamePanel extends JPanel {
     private GameInfo answer;
     private GameButton[][] pan = new GameButton[9][9];
     private Position selectedPos = new Position();
-    private boolean isPlay;
+    private boolean isPlaying;
+    private GameFrame parentFrame;
 
-    GamePanel() {
+    GamePanel(GameFrame parentFrame) {
+        this.parentFrame = parentFrame;
+
         setLayout(new GridLayout(9, 9));
-
         NewGame();
     }
 
@@ -28,7 +30,7 @@ public class GamePanel extends JPanel {
     }
 
     public void NewGame() {
-        isPlay = false;
+        isPlaying = false;
         removeAll();
         answer = SudokuPanGenerator.GeneratePan();
         selectedPos.setEmpty();
@@ -37,9 +39,9 @@ public class GamePanel extends JPanel {
             for (int col = 0; col < 9; col++) {
                 GameButton t;
                 if (answer.getAnswer_mask(row, col)) {
-                    t = new GameButton("" + answer.getAnswer(row, col), true, row, col, pickColor(row, col));
+                    t = new GameButton(answer.getAnswer(row, col), true, row, col, pickColor(row, col));
                 } else {
-                    t = new GameButton("", false, row, col, pickColor(row, col));
+                    t = new GameButton(GameButton.EMPTY_DATA, false, row, col, pickColor(row, col));
                 }
 
                 t.setPreferredSize(new Dimension(60, 60));
@@ -57,13 +59,15 @@ public class GamePanel extends JPanel {
                         char c = e.getKeyChar();
                         if ('1' <= c && c <= '9') {
                             InputBoard(c - '0');
+                        } else if (c == '\n') {
+                            InputBoard(GameButton.EMPTY_DATA);
                         }
                     }
                 });
                 t.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (isPlay) {
+                        if (isPlaying) {
                             Object source = e.getSource();
                             if (source instanceof GameButton) {
                                 GameButton btn = (GameButton) source;
@@ -105,7 +109,7 @@ public class GamePanel extends JPanel {
                 pan[row][col] = t;
             }
         }
-        isPlay = true;
+        isPlaying = true;
     }
 
     public void InputBoard(int num) {
@@ -113,13 +117,57 @@ public class GamePanel extends JPanel {
             pan[selectedPos.row][selectedPos.col].setData(num);
             pan[selectedPos.row][selectedPos.col].deHighlight();
             selectedPos.setEmpty();
-            //TODO validate
+            boolean[] checkVec = new boolean[10];
+            for (int row = 0; row < 9; row++) {
+                for (int col = 0; col < 9; col++) {
+                    if (!(1 <= pan[row][col].getData() && pan[row][col].getData() <= 9)) {
+                        return;
+                    }
+                }
+            }
+            for (int row = 0; row < 9; row++) {
+                for (int col = 0; col < 9; col++) {
+                    if (checkVec[pan[row][col].getData()]) {
+                        return;
+                    }
+                    checkVec[pan[row][col].getData()] = true;
+                }
+                for (int i = 0; i < 10; i++) {
+                    checkVec[i] = false;
+                }
+            }
+            for (int col = 0; col < 9; col++) {
+                for (int row = 0; row < 9; row++) {
+                    if (checkVec[pan[row][col].getData()]) {
+                        return;
+                    }
+                    checkVec[pan[row][col].getData()] = true;
+                }
+                for (int i = 0; i < 10; i++) {
+                    checkVec[i] = false;
+                }
+            }
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    for (int k = 0; k < 9; k++) {
+                        if (checkVec[pan[i * 3 + k / 3][j * 3 + k % 3].getData()]) {
+                            return;
+                        }
+                        checkVec[pan[i * 3 + k / 3][j * 3 + k % 3].getData()] = true;
+                    }
+                    for (int k = 0; k < 10; k++) {
+                        checkVec[k] = false;
+                    }
+                }
+            }
+            isPlaying = false;
+            parentFrame.stopGame();
         }
     }
 
 
     public void ShowSolution() {
-        isPlay = false;
+        isPlaying = false;
         if (!selectedPos.isEmpty()) {
             pan[selectedPos.row][selectedPos.col].deHighlight();
         }
