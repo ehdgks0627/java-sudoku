@@ -32,7 +32,7 @@ public class GamePanel extends JPanel {
     public void NewGame() {
         isPlaying = false;
         removeAll();
-        answer = SudokuPanGenerator.GeneratePan();
+        answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_EASY);
         selectedPos.setEmpty();
 
         for (int row = 0; row < 9; row++) {
