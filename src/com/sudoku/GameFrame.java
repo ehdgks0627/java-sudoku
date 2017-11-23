@@ -7,10 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameFrame extends JFrame {
-
     private GameTime timeLabel = new GameTime();
-
     private GamePanel gamePanel = new GamePanel(this);
+    private ButtonGroup buttonGroup;
 
     GameFrame() {
         setTitle("스도쿠게임");
@@ -29,15 +28,20 @@ public class GameFrame extends JFrame {
         JRadioButton easy = new JRadioButton("EASY");
         easy.setFont(font1);
         easy.setSelected(true);
+        easy.setActionCommand(easy.getText());
+
         JRadioButton medium = new JRadioButton("MEDIUM");
         medium.setFont(font1);
+        medium.setActionCommand(medium.getText());
+
         JRadioButton hard = new JRadioButton("HARD");
         hard.setFont(font1);
+        hard.setActionCommand(hard.getText());
 
-        ButtonGroup group = new ButtonGroup();
-        group.add(easy);
-        group.add(medium);
-        group.add(hard);
+        buttonGroup = new ButtonGroup();
+        buttonGroup.add(easy);
+        buttonGroup.add(medium);
+        buttonGroup.add(hard);
 
         controlPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 20));
         controlPanel.add(easy);
@@ -45,8 +49,20 @@ public class GameFrame extends JFrame {
         controlPanel.add(hard);
         controlPanel.add(timeLabel);
 
+        Font font = new Font("null", Font.PLAIN, 20);
+
         JButton btnNewGame = new JButton("New Game");
         controlPanel.add(btnNewGame);
+        btnNewGame.setPreferredSize(new Dimension(200, 50));
+        btnNewGame.setFont(font);
+        btnNewGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gamePanel.NewGame(buttonGroup.getSelection().getActionCommand());
+                timeLabel.Reset();
+                timeLabel.Start();
+            }
+        });
 
         JButton btnShowAnswer = new JButton("Show Answer");
         controlPanel.add(btnShowAnswer);
@@ -54,19 +70,8 @@ public class GameFrame extends JFrame {
         JButton btnExit = new JButton("Exit");
         controlPanel.add(btnExit);
 
-        Font font = new Font("null", Font.PLAIN, 20);
         timeLabel.setFont(font);
 
-        btnNewGame.setPreferredSize(new Dimension(200, 50));
-        btnNewGame.setFont(font);
-        btnNewGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                gamePanel.NewGame();
-                timeLabel.Reset();
-                timeLabel.Start();
-            }
-        });
 
         btnShowAnswer.setPreferredSize(new Dimension(200, 50));
         btnShowAnswer.setFont(font);

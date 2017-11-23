@@ -35,10 +35,24 @@ public class GamePanel extends JPanel {
         }
     }
 
-    public void NewGame() {
+    public void NewGame(String difficultyCommand) {
         isPlaying = false;
         removeAll();
-        answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_EASY);
+        switch(difficultyCommand)
+        {
+            case "EASY":
+                answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_EASY);
+                break;
+            case "MEDIUM":
+                answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_MEDIUM);
+                break;
+            case "HARD":
+                answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_HARD);
+                break;
+            default:
+                answer = SudokuPanGenerator.GeneratePan(SudokuPanGenerator.DIFFICULTY_EASY);
+                break;
+        }
         selectedPos.setEmpty();
 
         for (int row = 0; row < 9; row++) {
